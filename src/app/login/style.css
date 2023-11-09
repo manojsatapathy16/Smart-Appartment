@@ -1,0 +1,119 @@
+
+.login_wrapper {
+  height: 100vh;
+  background-color: #ececec;
+  /* padding: 15px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login_bg {
+  margin: 0 auto;
+  background-position: center bottom;
+  background: #3065b5;
+  background: linear-gradient(90deg, rgba(43, 157, 199, 1) 0%, rgba(23, 103, 150, 1) 37%, rgba(1, 50, 103, 1) 100%);
+  /* height: 100vh; */
+  border-radius: 20px;
+ width: 400px;
+ border-bottom-left-radius: 20px;
+ overflow: hidden;
+}
+
+.login_container {
+  background-color: #ffffff;
+}
+
+.login_container_img {
+  height: 25vh;
+  /* background: white; */
+  background-color: white;
+  /* border-bottom-right-radius: 100px; */
+}
+
+.bg_img {
+  background-position: center bottom;
+  background: #3065b5;
+  background: linear-gradient(90deg, rgba(43, 157, 199, 1) 0%, rgba(23, 103, 150, 1) 37%, rgba(1, 50, 103, 1) 100%);
+  height: 25vh;
+  border-bottom-right-radius: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.bg_img img{
+  max-width: 100%;
+}
+
+.login_container_inputs {
+  /* height: 60vh; */
+  /* border-top-left-radius: 100px; */
+  background-position: center bottom;
+  background: #3065b5;
+  background: linear-gradient(90deg, rgba(43, 157, 199, 1) 0%, rgba(23, 103, 150, 1) 37%, rgba(1, 50, 103, 1) 100%);
+}
+
+.login_container_items {
+  /* height: 75vh; */
+  border-top-left-radius: 100px;
+  border-bottom-left-radius: 20px;
+  background-color: #fdfdfd;
+  display: flex;
+  flex-flow: column;
+  padding-bottom: 50px;
+}
+
+.title_ {
+  margin-top: 45px;
+  /* margin-left: 40px; */
+  font-size: 30px;
+  font-family: sans-serif;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding: 20px;
+  margin-top: 15px;
+}
+
+.inputs input {
+  padding: 15px 20px;
+  border: 1px solid #80808059;
+  border-radius: 30px;
+  font-size: 16px;
+  border-radius: 30px;
+  width: 100%;
+}
+
+.subtim_login {
+  text-align: center;
+  padding: 15px;
+}
+
+button.btn_login {
+  padding: 15px 50px;
+  border: 1px solid #ebebeb;
+  background-position: center bottom;
+  background: #3065b5;
+  background: linear-gradient(90deg, rgba(43, 157, 199, 1) 0%, rgba(23, 103, 150, 1) 37%, rgba(1, 50, 103, 1) 100%);
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  border-radius: 30px;
+}
+.password_field svg {
+	position: absolute;
+	right: 15px;
+	top: 14px;
+	/* font-size: 19px; */
+	color: gray;
+}
+.password_field {
+	position: relative;
+}
