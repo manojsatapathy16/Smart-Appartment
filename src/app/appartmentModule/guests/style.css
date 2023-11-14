@@ -18945,10 +18945,14 @@ footer .help-people {
 }
 /* line 700, ../sass/styles.scss */
 .main-container .listed .item-meeting .avatar-doctor .avatar-image img {
-  margin-bottom: 15px;
+  margin-bottom: 0px;
   border-radius: 2px;
   border: 1px solid #eeeeee;
   padding: 5px;
+  height: 253px;
+    object-fit: contain;
+    width: 100%;
+
 }
 /* line 706, ../sass/styles.scss */
 .main-container .listed .item-meeting .avatar-doctor .avatar-image a {
@@ -19021,12 +19025,12 @@ footer .help-people {
   text-transform: inherit;
 }
 /* line 734, ../sass/styles.scss */
-.main-container .listed .item-meeting .data-meeting .info-meet li:last-child, .main-container .listed .item-meeting .data-meeting .info-meet li:first-child {
+.main-container .listed .item-meeting .data-meeting .info-meet li:first-child {
   border-top: none;
 }
 /* line 737, ../sass/styles.scss */
 .main-container .listed .item-meeting .data-meeting .info-meet li:last-child {
-  padding: 0px 5px 15px 5px;
+  padding: 10px 5px 15px 5px;
 }
 /* line 742, ../sass/styles.scss */
 .main-container .listed .item-meeting .data-meeting ul.btns {
@@ -20990,4 +20994,74 @@ span.entry-category a {
 }
 .nodatafound {
   text-align: center;
+}
+header .tools-top .avatar-profile .avatar-image img {
+  height: 100%;
+  object-fit: cover;
+
+}
+header .tools-top .avatar-profile .avatar-image {
+  height: 39px;
+}
+.avatar-image .slick-prev:before, .avatar-image .slick-next:before {
+  color: #5f87c4;
+}
+.avatar-image .slick-dots {
+  bottom: 25px;
+}
+.avatar-image .slick-dots li button:before {
+  color: #5f87c4;
+}
+.avatar-image .slick-dots li.slick-active button:before {
+  color: #5f87c4;
+}
+
+/* 13-11-2023 */
+.main-container aside {
+  position: sticky;
+  top: 20px;
+}
+body, html {
+  overflow-x: unset;
+}
+.main-container {
+ overflow: unset;
+}
+.pupop_wrapper {
+  position: fixed;
+  height: 100vh;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #00000061;
+  z-index: 9;
+}
+.popup_body {
+  background: #fff;
+  width: 400px;
+  padding: 40px 40px 20px;
+  border-radius: 5px;
+}
+.popup_body ul.list-unstyled.btns {
+  display: flex;
+  gap: 10px;
+}
+.popup_body p {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 25px;
+}
+.addVisitor input{
+  margin-bottom: 5px;
+}
+.addVisitor .popup_body{
+  width: 460px;
+}
+.addVisitor button{
+  margin-top: 15px;
+
 }

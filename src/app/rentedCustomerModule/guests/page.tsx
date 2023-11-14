@@ -10,39 +10,47 @@ import { APIS } from "@/NetworkConroller";
 import Header from "@/Components/Header/page";
 import Footer from "@/Components/Footer/page";
 import Image from 'next/image'
-import nodatafound from '../../../public/nodatafound.png';
-import Pagination from '../../Components/Paginations/pagination';
+import nodatafound from '../../../../public/nodatafound.png';
+import Pagination from '../../../Components/Paginations/pagination';
 
 import data from './data.json';
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 
 
 
 
 const Guests = () => {
+    var initialValue = { visitorName: '', Purpose: '', ArrivalTime: '', Members: '', UploadImage: '' };
     const { navActive, navActives } = useContext(PostContext);
     const [activeClass, setActiveClass] = useState<any>(navActives)
     const { userData } = useContext(PostContext);
     const [customerList, setCustomerList] = useState<any>([]);
     // console.log(userData,'contextdata')
-    let token: any = localStorage.getItem('token');
-    let userName: any = localStorage.getItem('userName');
     const [selectvalue, setSelectValue] = useState('');
     const [totalPage, setTotalPage] = useState('');
     const [pageSize, setPageSize] = useState<number>(1);
     const [currentPage, setCurrentPage] = useState<any>(1);
+    const [openPupop, setOpenPupop] = useState<any>(false);
+    const [addGuest, setAddGuest] = useState<any>(initialValue);
+    let token: any = localStorage.getItem('token');
+    let userName: any = localStorage.getItem('userName');
+    let authorization: any = localStorage.getItem('authorization');
+
     const router = useRouter();
 
 
 
-
-// console.log(totalPage,'totalpage*****')
-// console.log(pageSize,'pageSize****')
+    // console.log(totalPage,'totalpage*****')
+    // console.log(pageSize,'pageSize****')
     useEffect(() => {
         // console.log(router?.query,'@Manoj here')
         getCall()
         setActiveClass("Guest's");
         navActive("Guest's");
-    }, [selectvalue,currentPage])
+    }, [selectvalue, currentPage])
 
     const getCall = () => {
         try {
@@ -89,6 +97,64 @@ const Guests = () => {
         return data.slice(firstPageIndex, lastPageIndex);
     }, [currentPage]);
 
+    var settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1
+    };
+    const addCustomerHandle = (e: any) => {
+        setOpenPupop(true);
+    };
+
+    // popupget value
+    const getValueHandler = (e: any) => {
+        console.log(e,"Lingar4aj")
+        // return
+        const { id, value } = e.target;
+        setAddGuest({ ...addGuest, [id]: value });
+    }
+
+    //  addVisiterSubmitHandler
+    const addVisiterSubmitHandler = (e: any) => {
+        e.preventDefault();
+        addVisiters();
+    }
+    const addVisiters = () => {
+        try {
+            const headers = { 'Authorization': 'Bearer ' + token };
+            let formData = new FormData();
+
+            formData.append('name', addGuest.visitorName);
+            formData.append('purpose', addGuest.Purpose);
+            formData.append('expected_arrival', addGuest.ArrivalTime);
+            formData.append('picture', addGuest.UploadImage);
+            formData.append('members', addGuest.Members);
+            axios.post(APIS.ADD_VISITERS, formData, { headers }).then(({ data }) => {
+                if (data.status) {
+                    console.log(data, 'great')
+                    setAddGuest(initialValue);
+                } else {
+                    console.log(data.msg);
+
+                }
+
+            })
+                .catch(function (error) {
+                    // handle error
+                    console.log(error.response.status, 'errorqqqqqqqqqqqqqqqqqqqq');
+                    if (error.response.status == '401') {
+                        // router.push('/');
+                    }
+                });
+        }
+        catch (err) {
+            console.log(err);
+            router.replace('./')
+        }
+
+    }
     return (
         <div>
 
@@ -103,6 +169,8 @@ const Guests = () => {
                                     <div className="filters">
                                         <h4>Filter by</h4>
                                         <ul className="list-unstyled">
+                                            {(authorization != 'cus') ? null : <li className="addGuest"><button className="btn btn-green btn-xsmall confirm" onClick={addCustomerHandle}>+ Add Guest</button></li>}
+
                                             <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="highest to lowest"><i className="fa fa-arrow-down" aria-hidden="true"></i></a></li>
                                             <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="lowest to highest"><i className="fa fa-arrow-up" aria-hidden="true"></i></a></li>
                                             <li>
@@ -128,7 +196,35 @@ const Guests = () => {
                                                     {/* <!--Item--> */}
                                                     <div className="avatar-doctor">
                                                         <div className="avatar-image">
-                                                            <img src={each?.picture} alt="doctor" className="img-responsive" />
+                                                            {/* <OwlCarousel className='owl-theme' loop margin={10} nav autoplay={true} {...product_slider}>
+    <div className='item'>
+    <img src={each?.allimg[0]} alt="doctor" className="img-responsive" />
+    </div>
+    <div className='item'>
+    <img src={each?.allimg[0]} alt="doctor" className="img-responsive" />
+    </div>
+    <div className='item'>
+    <img src={each?.allimg[0]} alt="doctor" className="img-responsive" />
+    </div>
+    <div className='item'>
+    <img src={each?.allimg[0]} alt="doctor" className="img-responsive" />
+    </div>
+    
+</OwlCarousel>; */}
+
+                                                            <Slider {...settings}>
+                                                                {each?.allimg?.map((img: any) => {
+                                                                    return (
+                                                                        <div>
+                                                                            <img src={img} alt="doctor" className="img-responsive" />
+                                                                        </div>
+                                                                    )
+                                                                })}
+
+
+                                                            </Slider>
+
+                                                            {/* <img src={each?.allimg[0]} alt="doctor" className="img-responsive" /> */}
                                                             {/* <h4>
                           <a href="javascript:void(0)" title="See Profile">{each.visitor_name}</a></h4> */}
                                                             {/* <p>Cardiothoracic Anesthesia and Anesthesiology - FCI</p> */}
@@ -177,7 +273,7 @@ const Guests = () => {
                                         <li onClick={(e:any)=>setPaginationCount(e.target.innerHTML)}>3</li>
                                     </ul>
                                 </div> */}
-                                {!customerList.length ?'':<Pagination
+                                {!customerList.length ? '' : <Pagination
                                     className="pagination-bar"
                                     currentPage={currentPage}
                                     totalCount={totalPage}
@@ -185,7 +281,7 @@ const Guests = () => {
                                     onPageChange={(page: any) => {
                                         setCurrentPage(page)
                                         // console.log(page,"page chnaged")
-                                      
+
                                     }}
                                 />}
                             </div>
@@ -222,7 +318,48 @@ const Guests = () => {
                         </div>
                     </div>
                 </section>
+                {openPupop ? <div className="pupop_wrapper addVisitor">
+                    <div className="popup_inner">
+                        <div className="popup_body">
+                            <p>Add Visiter</p>
+                            <form onSubmit={addVisiterSubmitHandler}>
+                                <div className="mb-3">
+                                    <label htmlFor="visitorName" className="form-label">Name</label>
+                                    <input type="text" value={addGuest.visitorName} className="form-control" id="visitorName" aria-describedby="emailHelp" onChange={getValueHandler} />
+                                </div>
 
+
+                                <div className="mb-3">
+                                    <label htmlFor="Purpose" className="form-label">Purpose</label>
+                                    <input type="text" value={addGuest.Purpose} className="form-control" id="Purpose" onChange={getValueHandler} />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="ArrivalTime" className="form-label">Arrival Time</label>
+                                    <input type="text" value={addGuest.ArrivalTime} className="form-control" id="ArrivalTime" onChange={getValueHandler} />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="Members" className="form-label">Members</label>
+                                    <input type="text" value={addGuest.Members} className="form-control" id="Members" onChange={getValueHandler} />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="UploadImage" className="form-label">Upload Image</label>
+                                    <input type="file" accept="image/png, image/jpeg, image/jpg" value={addGuest.UploadImage} className="form-control" id="UploadImage" onChange={getValueHandler} />
+                                </div>
+                                <ul className="list-unstyled btns">
+                                    <li><button type="submit" className="btn btn-green btn-xsmall confirm">Submit</button></li>
+                                    <li><button className="btn btn-red btn-xsmall confirm" onClick={() => setOpenPupop(false)}> cancel</button></li>
+                                </ul>
+
+                            </form>
+                            {/* <p>Do you agree?</p>
+                                                        <ul className="list-unstyled btns">
+                                                            <li><button className="btn btn-green btn-xsmall confirm" onClick={selecthandleChange}>Yes</button></li>
+                                                            <li><button className="btn btn-red btn-xsmall confirm" onClick={() => setOpenPupop(false)} >No</button></li>
+                                                        </ul> */}
+                        </div>
+
+                    </div>
+                </div> : ''}
                 <Footer />
             </div>
         </div>

@@ -7,7 +7,7 @@ function Footer() {
 
     return (
         <div>
-              <footer>
+              {/* <footer>
                 <div className="container">
                     <div className="row">
                         <div className="emergency-number">
@@ -25,18 +25,18 @@ function Footer() {
                         <div className="help-people">
                             <hr className="divisor"/>
 
-                            {/* <!--Sponsors--> */}
+                       
                             <div className="sponsors">
                                 <span><a href="#"><Image src={sponsor} alt="sponsor" className="img-responsive"/></a></span>
                                 <span><a href="#"><Image src={sponsor} alt="sponsor" className="img-responsive"/></a></span>
                                 <span><a href="#"><Image src={sponsor} alt="sponsor" className="img-responsive"/></a></span>
                                 <span><a href="#"><Image src={sponsor} alt="sponsor" className="img-responsive"/></a></span>
                             </div>
-                            {/* <!--Sponsors--> */}
+                           
                         </div>
                     </div>
                 </div>
-            </footer>
+            </footer> */}
             {/* <!--Copyrights--> */}
             <div className="copyrights">
                 {/* <!--Meet Social--> */}

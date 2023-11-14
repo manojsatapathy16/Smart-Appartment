@@ -15,7 +15,7 @@ import { useRouter } from 'next/navigation'
 
 const Login = () => {
     const { userData, addData } = useContext(PostContext);
-    const [employeeid, setEmployeeid] = useState('Z1@gmail.com'); //01SC370
+    const [employeeid, setEmployeeid] = useState('a@gmail.com'); //01SC370
     const [password, setPassword] = useState('Abc@1234'); //suyog2022**
     const [loader, setLoader] = useState(false);
     const [checksave, setCheckSave] = useState(false);
@@ -85,15 +85,34 @@ const Login = () => {
                         //     pathname: '/appointmentList',
                         //     query: { data },
                         //   });
-
+                        localStorage.setItem('authorization', data.user_type)
                         localStorage.setItem('token', data.token)
                         localStorage.setItem('userName', data.name)
+                        localStorage.setItem('userImage', data.img)
                         let empData = {
                             id: employeeid,
                             psw: password,
                         };
                         localStorage.setItem('empData', JSON.stringify(empData));
-                        router.push('/guests');
+                        router.push('appartmentModule/guests');
+                        addData(data);
+                    } else if (data.user_type == 'cus') {
+
+                        // router.push('/appointmentList')
+                        // router.push({
+                        //     pathname: '/appointmentList',
+                        //     query: { data },
+                        //   });
+                        localStorage.setItem('authorization', data.user_type)
+                        localStorage.setItem('token', data.token)
+                        localStorage.setItem('userName', data.name)
+                        localStorage.setItem('userImage', data.img)
+                        let empData = {
+                            id: employeeid,
+                            psw: password,
+                        };
+                        localStorage.setItem('empData', JSON.stringify(empData));
+                        router.push('rentedCustomerModule/guests');
                         addData(data);
                     }
                     else {

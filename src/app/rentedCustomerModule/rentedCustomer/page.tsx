@@ -12,7 +12,7 @@ import Footer from "@/Components/Footer/page";
 
 
 
-const Security = () => {
+const RentedCustomer = () => {
     const { navActive,navActives } = useContext(PostContext);
     const [activeClass,setActiveClass]=useState<any>(navActives)
     const {userData} = useContext(PostContext);
@@ -29,14 +29,14 @@ const Security = () => {
 useEffect(()=>{
     // console.log(router?.query,'@Manoj here')
     getCall()
-    setActiveClass("Security");
-    navActive("Security");
+    setActiveClass("Rented Customer");
+    navActive("Rented Customer");
 },[])
 // console.log(customerList?.data?.visitor_name, 'people list')
 const getCall = ()=>{
     try{
         
-        axios.get(APIS.SECURITY_LIST,{headers: {'Authorization': 'Bearer '+token}}).then(({data}) => {
+        axios.get(APIS.RENTED_CUSTOMER,{headers: {'Authorization': 'Bearer '+token}}).then(({data}) => {
                 if(data.status){
                     console.log(data, 'people list')
                     setCustomerList(data.data); 
@@ -172,4 +172,4 @@ console.log(customerList, 'data list is loaded***************')
 
     );
 };
-export default Security;
+export default RentedCustomer;

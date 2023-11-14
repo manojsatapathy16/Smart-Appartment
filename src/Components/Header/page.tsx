@@ -9,6 +9,7 @@ function Header() {
     const { navActive,navActives } = useContext(PostContext);
     const [activeClass,setActiveClass]=useState<any>(navActives)
     let userName:any = localStorage.getItem('userName');
+    let userImage:any = localStorage.getItem('userImage');
     console.log(navActives,'navactive');
     const router = useRouter();
     const Logout = ()=>{
@@ -29,7 +30,7 @@ else if(e.target.innerHTML=="Rented Customer"){
     router.push('/rentedCustomer')
 }
 else if(e.target.innerHTML=="Security"){
-    router.push('/Security')
+    router.push('/security')
 }
 
     }
@@ -56,7 +57,7 @@ else if(e.target.innerHTML=="Security"){
                                     <a href="javascript:void(0)"><i className="fa fa-pencil"></i> edit profile</a>
                                 </div>
                                 <div className="avatar-image">
-                                    <img src="appointments-reserved_data/avatar-profile.jpg" alt="" className="img-responsive"/>
+                                    <img src={userImage} alt="" className="img-responsive"/>
                                 </div>
                             </div>
                             {/* <!--Avatar--> */}
