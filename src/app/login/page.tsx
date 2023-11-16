@@ -76,15 +76,9 @@ const Login = () => {
                 if (data.status) {
                     console.log(data, 'hiii')
                  
-                    setLoader(false);
+                    setLoader(true);
                     
                     if (data.user_type == 'aprt') {
-
-                        // router.push('/appointmentList')
-                        // router.push({
-                        //     pathname: '/appointmentList',
-                        //     query: { data },
-                        //   });
                         localStorage.setItem('authorization', data.user_type)
                         localStorage.setItem('token', data.token)
                         localStorage.setItem('userName', data.name)
@@ -95,6 +89,7 @@ const Login = () => {
                             psw: password,
                         };
                         localStorage.setItem('empData', JSON.stringify(empData));
+                        setLoader(false);
                         router.push('home/appartment/guests');
                         addData(data);
                     } else if (data.user_type == 'cus') {
@@ -114,6 +109,7 @@ const Login = () => {
                             psw: password,
                         };
                         localStorage.setItem('empData', JSON.stringify(empData));
+                        setLoader(false);
                         router.push('home/customer/guests');
                         addData(data);
                     }
@@ -211,7 +207,8 @@ const Login = () => {
 
                                 <div className="subtim_login">
                                     <button onClick={onLogin} className="btn_login">
-                                        Login
+                                    {loader?<span className="spinner_button"> <i className="fa fa-spinner fa-spin"></i></span> :null} Login
+                                        
                                     </button>
                                 </div>
                             </div>

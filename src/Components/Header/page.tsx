@@ -5,15 +5,15 @@ import logo from '../../../public/LOGO_SMS.png';
 import { useContext, useState } from "react";
 import { PostContext } from '@/context/DataContext';
 
-function Header(props:any) {
-    const { navActive,navActives } = useContext(PostContext);
-    const [activeClass,setActiveClass]=useState<any>(navActives)
-    let userName:any = localStorage.getItem('userName');
-    let userImage:any = localStorage.getItem('userImage');
-    let navPath:any = localStorage.getItem('path');
-    console.log(navActives,'navactive');
+function Header(props: any) {
+    const { navActive, navActives } = useContext(PostContext);
+    const [activeClass, setActiveClass] = useState<any>(navActives)
+    let userName: any = localStorage.getItem('userName');
+    let userImage: any = localStorage.getItem('userImage');
+    let navPath: any = localStorage.getItem('path');
+    console.log(navActives, 'navactive');
     const router = useRouter();
-    const Logout = ()=>{
+    const Logout = () => {
         localStorage.removeItem('empData');
         localStorage.removeItem('userImage');
         localStorage.removeItem('userName');
@@ -23,34 +23,24 @@ function Header(props:any) {
         router.push('/')
     }
     // active class add to nav element
-    const handleClickNav=(e:any)=>{
-        // e.preventDefault();
-console.log(e.target.innerHTML,'nav click')
-setActiveClass(e.target.innerHTML);
-navActive(e.target.innerHTML);
-if(e.target.innerHTML=="Guest's"){
-    router.push(navPath+'/guests')
-
-}
-else if(e.target.innerHTML=="Rented Customer"){
-    router.push(navPath+'/rentedCustomer')
-}
-else if(e.target.innerHTML=="Security"){
-    router.push(navPath+'/security')
-}
-
+    const handleClickNav = (e: any) => {
+        setActiveClass(e.target.innerHTML);
+        navActive(e.target.innerHTML);
+        e.target.innerHTML === "Guest's" && router.push(navPath + '/guests')
+        e.target.innerHTML === "Rented Customer" && router.push(navPath + '/rentedCustomer')
+        e.target.innerHTML == "Security" && router.push(navPath + '/security')
     }
     return (
         <div>
-             <header>
+            <header>
                 <div className="container">
                     <div className="row header_logo_wraper">
                         {/* <!--Logo--> */}
                         <div className="logo">
                             <a href="javascript:void(0)">
-                            <Image src={logo} alt="Picture of the author"/>
+                                <Image src={logo} alt="Picture of the author" />
                                 {/* <img src="" alt="logo" className="img-responsive"/> */}
-                                </a>
+                            </a>
                         </div>
                         {/* <!--Logo--> */}
 
@@ -63,7 +53,7 @@ else if(e.target.innerHTML=="Security"){
                                     <a href="javascript:void(0)"><i className="fa fa-pencil"></i> edit profile</a>
                                 </div>
                                 <div className="avatar-image">
-                                    <img src={userImage} alt="" className="img-responsive"/>
+                                    <img src={userImage} alt="" className="img-responsive" />
                                 </div>
                             </div>
                             {/* <!--Avatar--> */}
@@ -84,7 +74,7 @@ else if(e.target.innerHTML=="Security"){
                     <h4 className="navbar-brand">menu</h4>
                     <div className="navbar-header">
                         <button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                          <i className="fa fa-bars" aria-hidden="true"></i>
+                            <i className="fa fa-bars" aria-hidden="true"></i>
                         </button>
                     </div>
 
@@ -92,9 +82,9 @@ else if(e.target.innerHTML=="Security"){
 
                         <ul className="nav navbar-nav" id="nav">
                             {/* <li className="navItem active" onClick={()=>router.push('/appointmentList')}><i className="fa fa-list-alt"></i> <a href="#"> Guest's</a> </li> */}
-                            <li className={(activeClass=="Guest's")||(navActives=="Guest's")?"navItem active":"navItem"} onClick={handleClickNav}><i className="fa fa-list-alt"></i> <a href="#">Guest's</a> </li>
-                            {(props.authorization == 'cus') ? null : <li className={(activeClass=="Rented Customer")||(navActives=="Rented Customer")?"navItem active":"navItem"} onClick={handleClickNav}> <i className="fa fa-address-book-o"></i> <a href="#">Rented Customer</a> </li>}
-                            <li className={(activeClass=="Security")||(navActives=="Security")?"navItem active":"navItem"} onClick={handleClickNav}> <i className="fa fa-file-text-o"></i> <a href="#">Security</a> </li>
+                            <li className={(activeClass == "Guest's") || (navActives == "Guest's") ? "navItem active" : "navItem"} onClick={handleClickNav}><i className="fa fa-list-alt"></i> <a href="#">Guest's</a> </li>
+                            {(props.authorization == 'cus') ? null : <li className={(activeClass == "Rented Customer") || (navActives == "Rented Customer") ? "navItem active" : "navItem"} onClick={handleClickNav}> <i className="fa fa-address-book-o"></i> <a href="#">Rented Customer</a> </li>}
+                            <li className={(activeClass == "Security") || (navActives == "Security") ? "navItem active" : "navItem"} onClick={handleClickNav}> <i className="fa fa-file-text-o"></i> <a href="#">Security</a> </li>
                             {/* <li> <i className="fa fa-files-o"></i> <a href="javascript:void(0)">Result Examinations</a> </li>
                             <li> <i className="fa fa-pencil"></i> <a href="javascript:void(0)">my account</a> </li> */}
                         </ul>
