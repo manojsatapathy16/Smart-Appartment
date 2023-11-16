@@ -10,8 +10,8 @@ import { APIS } from "@/NetworkConroller";
 import Header from "@/Components/Header/page";
 import Footer from "@/Components/Footer/page";
 import Image from 'next/image'
-import nodatafound from '../../../../public/nodatafound.png';
-import Pagination from '../../../Components/Paginations/pagination';
+import nodatafound from '../../../../../public/nodatafound.png';
+import Pagination from '../../../../Components/Paginations/pagination';
 
 import data from './data.json';
 import Slider from "react-slick";
@@ -38,6 +38,8 @@ const Guests = () => {
     let token: any = localStorage.getItem('token');
     let userName: any = localStorage.getItem('userName');
     let authorization: any = localStorage.getItem('authorization');
+    const [selectedImage, setSelectedImage] = useState<any>(null);
+    const [selectedImageView, setSelectedImageView] = useState<any>(null);
 
     const router = useRouter();
 
@@ -55,10 +57,9 @@ const Guests = () => {
     const getCall = () => {
         try {
             const headers = { 'Authorization': 'Bearer ' + token };
-            let formData = new FormData();
-            formData.append('type', selectvalue);
-            formData.append('page_no', currentPage);
-            axios.post(APIS.CUSTOMER, formData, { headers }).then(({ data }) => {
+            let formdata = new FormData();
+            formdata.append('authorization', 'cus');
+            axios.post(APIS.GET_VISITERS,formdata, { headers }).then(({ data }) => {
                 if (data.status) {
                     console.log(data, 'people list')
                     setCustomerList(data.data);
@@ -110,10 +111,14 @@ const Guests = () => {
 
     // popupget value
     const getValueHandler = (e: any) => {
-        console.log(e,"Lingar4aj")
-        // return
         const { id, value } = e.target;
         setAddGuest({ ...addGuest, [id]: value });
+    }
+    const imageSelect = (e: any) => {
+
+        setSelectedImageView(URL.createObjectURL(e.target.files[0]))
+        setSelectedImage(e.target.files[0]);
+        // console.log(e.target.files,'myimage')
     }
 
     //  addVisiterSubmitHandler
@@ -123,18 +128,23 @@ const Guests = () => {
     }
     const addVisiters = () => {
         try {
-            const headers = { 'Authorization': 'Bearer ' + token };
+            const headers = {
+                'Authorization': 'Bearer ' + token,
+                "Content-Type": "multipart/form-data",
+            };
             let formData = new FormData();
 
             formData.append('name', addGuest.visitorName);
             formData.append('purpose', addGuest.Purpose);
             formData.append('expected_arrival', addGuest.ArrivalTime);
-            formData.append('picture', addGuest.UploadImage);
+            formData.append('picture', selectedImage);
             formData.append('members', addGuest.Members);
             axios.post(APIS.ADD_VISITERS, formData, { headers }).then(({ data }) => {
                 if (data.status) {
                     console.log(data, 'great')
                     setAddGuest(initialValue);
+                    setSelectedImage(null);
+                     setSelectedImageView(null)
                 } else {
                     console.log(data.msg);
 
@@ -160,7 +170,7 @@ const Guests = () => {
 
             <div id="layout">
 
-                <Header />
+                <Header authorization={authorization}/>
                 <section className="container">
                     <div className="main-container">
                         <div className="row">
@@ -341,10 +351,27 @@ const Guests = () => {
                                     <label htmlFor="Members" className="form-label">Members</label>
                                     <input type="text" value={addGuest.Members} className="form-control" id="Members" onChange={getValueHandler} />
                                 </div>
-                                <div className="mb-3">
-                                    <label htmlFor="UploadImage" className="form-label">Upload Image</label>
-                                    <input type="file" accept="image/png, image/jpeg, image/jpg" value={addGuest.UploadImage} className="form-control" id="UploadImage" onChange={getValueHandler} />
-                                </div>
+
+                                {selectedImageView ? (
+                                    <div style={{display:'flex',alignItems:'center',gap:'20px'}}>
+                                        <div>
+                                        <img
+                                            alt="not found"
+                                            width={"100px"}
+                                            src={selectedImageView}
+                                        />
+                                        </div>
+                                        
+                                       
+                                        <button style={{marginTop:'0'}} onClick={() => { setSelectedImage(null); setSelectedImageView(null) }}>Remove</button>
+                                    </div>
+                                ) :
+                                    <div className="mb-3">
+                                        <label htmlFor="UploadImage" className="form-label">Upload Image</label>
+                                        <input type="file" accept="image/png, image/jpeg, image/jpg" value={addGuest.UploadImage} className="form-control" id="UploadImage" onChange={(e) => imageSelect(e)} />
+                                    </div>}
+
+
                                 <ul className="list-unstyled btns">
                                     <li><button type="submit" className="btn btn-green btn-xsmall confirm">Submit</button></li>
                                     <li><button className="btn btn-red btn-xsmall confirm" onClick={() => setOpenPupop(false)}> cancel</button></li>

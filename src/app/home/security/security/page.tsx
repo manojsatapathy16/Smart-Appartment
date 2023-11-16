@@ -11,7 +11,7 @@ import Header from "@/Components/Header/page";
 import Footer from "@/Components/Footer/page";
 import Image from 'next/image'
 import nodatafound from '../../../../public/nodatafound.png';
-import Pagination from '../../../Components/Paginations/pagination';
+import Pagination from '../../../../Components/Paginations/pagination';
 
 import data from '../guests/data.json';
 

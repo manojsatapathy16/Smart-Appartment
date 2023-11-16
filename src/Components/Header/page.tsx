@@ -5,15 +5,21 @@ import logo from '../../../public/LOGO_SMS.png';
 import { useContext, useState } from "react";
 import { PostContext } from '@/context/DataContext';
 
-function Header() {
+function Header(props:any) {
     const { navActive,navActives } = useContext(PostContext);
     const [activeClass,setActiveClass]=useState<any>(navActives)
     let userName:any = localStorage.getItem('userName');
     let userImage:any = localStorage.getItem('userImage');
+    let navPath:any = localStorage.getItem('path');
     console.log(navActives,'navactive');
     const router = useRouter();
     const Logout = ()=>{
         localStorage.removeItem('empData');
+        localStorage.removeItem('userImage');
+        localStorage.removeItem('userName');
+        localStorage.removeItem('authorization');
+        localStorage.removeItem('token');
+        localStorage.removeItem('path');
         router.push('/')
     }
     // active class add to nav element
@@ -23,14 +29,14 @@ console.log(e.target.innerHTML,'nav click')
 setActiveClass(e.target.innerHTML);
 navActive(e.target.innerHTML);
 if(e.target.innerHTML=="Guest's"){
-    router.push('/guests')
+    router.push(navPath+'/guests')
 
 }
 else if(e.target.innerHTML=="Rented Customer"){
-    router.push('/rentedCustomer')
+    router.push(navPath+'/rentedCustomer')
 }
 else if(e.target.innerHTML=="Security"){
-    router.push('/security')
+    router.push(navPath+'/security')
 }
 
     }
@@ -87,7 +93,7 @@ else if(e.target.innerHTML=="Security"){
                         <ul className="nav navbar-nav" id="nav">
                             {/* <li className="navItem active" onClick={()=>router.push('/appointmentList')}><i className="fa fa-list-alt"></i> <a href="#"> Guest's</a> </li> */}
                             <li className={(activeClass=="Guest's")||(navActives=="Guest's")?"navItem active":"navItem"} onClick={handleClickNav}><i className="fa fa-list-alt"></i> <a href="#">Guest's</a> </li>
-                            <li className={(activeClass=="Rented Customer")||(navActives=="Rented Customer")?"navItem active":"navItem"} onClick={handleClickNav}> <i className="fa fa-address-book-o"></i> <a href="#">Rented Customer</a> </li>
+                            {(props.authorization == 'cus') ? null : <li className={(activeClass=="Rented Customer")||(navActives=="Rented Customer")?"navItem active":"navItem"} onClick={handleClickNav}> <i className="fa fa-address-book-o"></i> <a href="#">Rented Customer</a> </li>}
                             <li className={(activeClass=="Security")||(navActives=="Security")?"navItem active":"navItem"} onClick={handleClickNav}> <i className="fa fa-file-text-o"></i> <a href="#">Security</a> </li>
                             {/* <li> <i className="fa fa-files-o"></i> <a href="javascript:void(0)">Result Examinations</a> </li>
                             <li> <i className="fa fa-pencil"></i> <a href="javascript:void(0)">my account</a> </li> */}

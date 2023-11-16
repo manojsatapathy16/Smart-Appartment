@@ -11,7 +11,7 @@ import Header from "@/Components/Header/page";
 import Footer from "@/Components/Footer/page";
 import Image from 'next/image'
 import nodatafound from '../../../../public/nodatafound.png';
-import Pagination from '../../../Components/Paginations/pagination';
+import Pagination from '../../../../Components/Paginations/pagination';
 
 import data from '../guests/data.json';
 
@@ -32,6 +32,7 @@ const Security = () => {
     
     let token: any = localStorage.getItem('token');
     let userName: any = localStorage.getItem('userName');
+    let authorization: any = localStorage.getItem('authorization');
     const router = useRouter();
 
 
@@ -49,7 +50,7 @@ const Security = () => {
             const headers = { 'Authorization': 'Bearer ' + token };
             let formData = new FormData();
             formData.append('page_no', currentPage);
-            axios.post(APIS.SECURITY_LIST, formData, { headers }).then(({ data }) => {
+            axios.post(APIS.SECURITY_LIST_CUSTOMER, formData, { headers }).then(({ data }) => {
                 if (data.status) {
                     console.log(data, 'people list')
                     setSecurityList(data.data);
@@ -128,7 +129,7 @@ const Security = () => {
 
             <div id="layout">
 
-                <Header />
+                <Header authorization={authorization}/>
                 <section className="container">
                     <div className="main-container">
                         <div className="row">

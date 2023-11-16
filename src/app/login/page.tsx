@@ -89,12 +89,13 @@ const Login = () => {
                         localStorage.setItem('token', data.token)
                         localStorage.setItem('userName', data.name)
                         localStorage.setItem('userImage', data.img)
+                        localStorage.setItem('path', '/home/appartment')
                         let empData = {
                             id: employeeid,
                             psw: password,
                         };
                         localStorage.setItem('empData', JSON.stringify(empData));
-                        router.push('appartmentModule/guests');
+                        router.push('home/appartment/guests');
                         addData(data);
                     } else if (data.user_type == 'cus') {
 
@@ -107,12 +108,13 @@ const Login = () => {
                         localStorage.setItem('token', data.token)
                         localStorage.setItem('userName', data.name)
                         localStorage.setItem('userImage', data.img)
+                        localStorage.setItem('path', '/home/customer')
                         let empData = {
                             id: employeeid,
                             psw: password,
                         };
                         localStorage.setItem('empData', JSON.stringify(empData));
-                        router.push('rentedCustomerModule/guests');
+                        router.push('home/customer/guests');
                         addData(data);
                     }
                     else {

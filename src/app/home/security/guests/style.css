@@ -18318,8 +18318,8 @@ header .tools-top .avatar-profile .user-edit {
 /* line 307, ../sass/styles.scss */
 header .tools-top .avatar-profile .user-edit h4 {
   line-height: 0;
-  margin-bottom: 3px;
-  font-size: 12px;
+  margin-bottom: 7px;
+  font-size: 20px;
   color: #f1f1f1;
   font-weight: 400;
   text-transform: capitalize;
@@ -18327,7 +18327,7 @@ header .tools-top .avatar-profile .user-edit h4 {
 }
 /* line 316, ../sass/styles.scss */
 header .tools-top .avatar-profile .user-edit a {
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: 0.5px;
   text-decoration: none;
 }
@@ -18951,7 +18951,7 @@ footer .help-people {
   padding: 5px;
   height: 253px;
     object-fit: contain;
-    width: 100%;
+    width: 99%;
 
 }
 /* line 706, ../sass/styles.scss */
@@ -21064,4 +21064,32 @@ body, html {
 .addVisitor button{
   margin-top: 15px;
 
+}
+header .tools-top .avatar-profile .avatar-image{
+  width: 60px;
+  height: 60px;
+  max-width: unset;
+}
+header .tools-top .avatar-profile .avatar-image img{
+  width: 100%;
+}
+header .tools-top {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+header .tools-top .avatar-profile {
+  display: flex;
+}
+header .tools-top .tools-help li a {
+  font-size: 53px;
+}
+header .tools-top .tools-help {
+  margin: 0;
+}
+header .tools-top .avatar-profile .user-edit {
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
