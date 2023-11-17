@@ -13,7 +13,7 @@ import Image from 'next/image'
 import nodatafound from '../../../../public/nodatafound.png';
 import Pagination from '../../../../Components/Paginations/pagination';
 
-import data from '../guests/data.json';
+
 
 
 
@@ -110,11 +110,11 @@ const Security = () => {
 
     let PageSize = 1;
 
-    const currentTableData = useMemo(() => {
-        const firstPageIndex = (currentPage - 1) * PageSize;
-        const lastPageIndex = firstPageIndex + PageSize;
-        return data.slice(firstPageIndex, lastPageIndex);
-    }, [currentPage]);
+    // const currentTableData = useMemo(() => {
+    //     const firstPageIndex = (currentPage - 1) * PageSize;
+    //     const lastPageIndex = firstPageIndex + PageSize;
+    //     return data.slice(firstPageIndex, lastPageIndex);
+    // }, [currentPage]);
 
     var settings = {
         dots: true,
@@ -153,7 +153,7 @@ const Security = () => {
                                 {securityList?.map((each: any) => {
                                     return (
 
-                                        <div className="row">
+                                        <div className="row" key={each.mob_no}>
 
                                             {/* <!--Item--> */}
                                             <div className="col-lg-12">
@@ -161,7 +161,7 @@ const Security = () => {
                                                     {/* <!--Item--> */}
                                                     <div className="avatar-doctor">
                                                         <div className="avatar-image">
-                                                            <img src={each?.picture} alt="doctor" className="img-responsive" />
+                                                            <Image src={each?.picture} alt="doctor" className="img-responsive" />
                                                             {/* <h4>
                           <a href="javascript:void(0)" title="See Profile">{each.visitor_name}</a></h4> */}
                                                             {/* <p>Cardiothoracic Anesthesia and Anesthesiology - FCI</p> */}

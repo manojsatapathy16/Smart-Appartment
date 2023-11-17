@@ -115,6 +115,7 @@ const Login = () => {
                     }
                     else {
                         alert('You are not authorized!')
+                        setLoader(false);
                     }
 
 
@@ -134,13 +135,16 @@ const Login = () => {
 
                 } else {
                     alert(data.msg);
+                    setLoader(false);
                 }
 
             })
         }
         catch (err) {
             console.log(err);
-            router.replace('./')
+            alert(err);
+            setLoader(false);
+            router.push('./')
         }
 
 

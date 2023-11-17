@@ -13,7 +13,6 @@ import Image from 'next/image'
 import nodatafound from '../../../../../public/nodatafound.png';
 import Pagination from '../../../../Components/Paginations/pagination';
 
-import data from './data.json';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -91,11 +90,11 @@ const Guests = () => {
     };
     let PageSize = 1;
 
-    const currentTableData = useMemo(() => {
-        const firstPageIndex = (currentPage - 1) * PageSize;
-        const lastPageIndex = firstPageIndex + PageSize;
-        return data.slice(firstPageIndex, lastPageIndex);
-    }, [currentPage]);
+    // const currentTableData = useMemo(() => {
+    //     const firstPageIndex = (currentPage - 1) * PageSize;
+    //     const lastPageIndex = firstPageIndex + PageSize;
+    //     return data.slice(firstPageIndex, lastPageIndex);
+    // }, [currentPage]);
 
     var settings = {
         dots: true,
@@ -186,7 +185,7 @@ const addVisiters = () => {
                                 {customerList?.map((each: any) => {
                                     return (
 
-                                        <div className="row">
+                                        <div className="row" key={each.visitor_name}>
 
                                             {/* <!--Item--> */}
                                             <div className="col-lg-12">
@@ -213,8 +212,8 @@ const addVisiters = () => {
                                                             <Slider {...settings}>
                                                                 {each?.allimg?.map((img: any) => {
                                                                     return (
-                                                                        <div>
-                                                                            <img src={img} alt="doctor" className="img-responsive" />
+                                                                        <div key={img}>
+                                                                            <Image src={img} alt="doctor" className="img-responsive" />
                                                                         </div>
                                                                     )
                                                                 })}

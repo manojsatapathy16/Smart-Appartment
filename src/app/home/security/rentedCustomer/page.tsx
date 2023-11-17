@@ -9,6 +9,7 @@ import axios from 'axios';
 import { APIS } from "@/NetworkConroller";
 import Header from "@/Components/Header/page";
 import Footer from "@/Components/Footer/page";
+import Image from 'next/image';
 
 
 
@@ -83,7 +84,7 @@ console.log(customerList, 'data list is loaded***************')
                             {customerList?.map((each:any) => {
                            return(   
                                
-          <div className="row">
+          <div className="row" key={each.mob_no}>
              
           {/* <!--Item--> */}
           <div className="col-lg-12">
@@ -91,7 +92,7 @@ console.log(customerList, 'data list is loaded***************')
                   {/* <!--Item--> */}
                   <div className="avatar-doctor">
                       <div className="avatar-image">
-                          <img src={each?.picture} alt="doctor" className="img-responsive"/>
+                          <Image src={each?.picture} alt="doctor" className="img-responsive"/>
                           {/* <h4>
                           <a href="javascript:void(0)" title="See Profile">{each.visitor_name}</a></h4> */}
                           {/* <p>Cardiothoracic Anesthesia and Anesthesiology - FCI</p> */}
