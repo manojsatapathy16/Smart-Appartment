@@ -2,6 +2,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { PostProvider } from '@/context/DataContext'
 import { Inter } from 'next/font/google'
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -26,6 +27,7 @@ export default function RootLayout({
       <body className={inter.className}>
       <PostProvider>
           <div>
+          <Toaster position='bottom-center' />
             {children}
           </div>
         </PostProvider>

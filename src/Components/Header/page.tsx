@@ -26,7 +26,7 @@ function Header(props: any) {
     const handleClickNav = (e: any) => {
         setActiveClass(e.target.innerHTML);
         navActive(e.target.innerHTML);
-        e.target.innerHTML === "Guest's" && router.push(navPath + '/guests')
+        e.target.innerHTML === "Guest‘s" && router.push(navPath + '/guests')
         e.target.innerHTML === "Rented Customer" && router.push(navPath + '/rentedCustomer')
         e.target.innerHTML == "Security" && router.push(navPath + '/security')
     }

@@ -11,6 +11,7 @@ import logo from '../../../public/LOGO_SMS.png';
 import axios from 'axios';
 import { APIS } from "@/NetworkConroller";
 import { useRouter } from 'next/navigation'
+import { toast } from 'react-hot-toast';
 
 
 const Login = () => {
@@ -20,6 +21,8 @@ const Login = () => {
     const [loader, setLoader] = useState(false);
     const [checksave, setCheckSave] = useState(false);
     const [passwordType, setPasswordType] = useState(false);
+    // const [actionMessage, setActionMessage] = useState<any>();
+    // const [showMessage, setShowMessage] = useState(false);
 
 
     const router = useRouter()
@@ -43,41 +46,24 @@ const Login = () => {
 
     const onLogin = async () => {
         try {
-            if (employeeid == ''||employeeid == undefined) {
+            if (employeeid == '' || employeeid == undefined) {
                 alert('Please Enter Your Username');
                 return;
             }
-            if (password == ''||password == undefined) {
+            if (password == '' || password == undefined) {
                 alert('Please Enter Your Password');
                 return;
             }
-            // Encode the String
-
-            // Decode the String
-            // var decodedString = Base64.decode(encodedString);
-            // console.log(decodedString);
-            //Login Start
-
-            // let encodedString = Base64.encode(password);
-
             let formdata = new FormData();
             setLoader(true);
-
-            // let device_id = await DeviceInfo.getUniqueId();
-
-            // let checkToken = await AsyncStorage.getItem('fcmToken');
-
             formdata.append('id', employeeid);
             formdata.append('psw', password);
-            // formdata.append('device_id', device_id);
-            // formdata.append('device_token', checkToken);
-
             await axios.post(APIS.LOGIN, formdata).then(({ data }) => {
                 if (data.status) {
                     console.log(data, 'hiii')
-                 
+
                     setLoader(true);
-                    
+
                     if (data.user_type == 'aprt') {
                         localStorage.setItem('authorization', data.user_type)
                         localStorage.setItem('token', data.token)
@@ -93,12 +79,6 @@ const Login = () => {
                         router.push('home/appartment/guests');
                         addData(data);
                     } else if (data.user_type == 'cus') {
-
-                        // router.push('/appointmentList')
-                        // router.push({
-                        //     pathname: '/appointmentList',
-                        //     query: { data },
-                        //   });
                         localStorage.setItem('authorization', data.user_type)
                         localStorage.setItem('token', data.token)
                         localStorage.setItem('userName', data.name)
@@ -114,63 +94,23 @@ const Login = () => {
                         addData(data);
                     }
                     else {
-                        alert('You are not authorized!')
+                        toast.error('You are not authorized!');
                         setLoader(false);
                     }
 
-
-                    //     if (checksave) {
-                    //     let empData = {
-                    //         id: employeeid,
-                    //       psw: password,
-                    //     };
-                    //      localStorage.setItem('empData', JSON.stringify(empData));
-
-
-                    //   } else {
-                    //      localStorage.removeItem('empData');
-                    //   }
-
-                    // router.replace('./')
-
                 } else {
-                    alert(data.msg);
+                    toast.error(data.msg);
                     setLoader(false);
                 }
 
             })
         }
-        catch (err) {
+        catch (err: any) {
             console.log(err);
-            alert(err);
+            toast.error(err);
             setLoader(false);
             router.push('./')
         }
-
-
-        // props.userlogin(formdata, async (success, error, data) => {
-        //   setLoader(false);
-        //   if (error) {
-        //     console.log(error, 'Error Login ');
-        //   } else {
-        //     console.log('Success', data.message);
-        //     if (data.status === 1) {
-
-        //       if (checksave) {
-        //         let empData = {
-        //           employee_id: employeeid.toUpperCase(),
-        //           password: password,
-        //         };
-        //         await localStorage.setItem('empData', JSON.stringify(empData));
-        //       } else {
-        //         await localStorage.removeItem('empData');
-        //       }
-
-        //     } else {
-
-        //     }
-        //   }
-        // });
     };
     const togglePasswordType = (type: boolean) => {
         {
@@ -210,10 +150,12 @@ const Login = () => {
                                 </div>
 
                                 <div className="subtim_login">
-                                    <button onClick={onLogin} className="btn_login">
-                                    {loader?<span className="spinner_button"> <i className="fa fa-spinner fa-spin"></i></span> :null} Login
-                                        
-                                    </button>
+                                    {loader ? <button onClick={onLogin} className="btn_login disable">
+                                        {loader ? <span className="spinner_button"> <i className="fa fa-spinner fa-spin"></i></span> : null} Login
+                                    </button> : <button onClick={onLogin} className="btn_login">
+                                        {loader ? <span className="spinner_button"> <i className="fa fa-spinner fa-spin"></i></span> : null} Login
+                                    </button>}
+
                                 </div>
                             </div>
                         </div>

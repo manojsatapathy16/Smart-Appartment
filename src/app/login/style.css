@@ -107,6 +107,15 @@ button.btn_login {
   letter-spacing: 1.5px;
   border-radius: 30px;
 }
+button.btn_login.disable {
+  background: gray;
+  cursor: no-drop;
+}
+button.btn_login.disable:hover{
+  background: gray;
+  cursor: no-drop;
+}
+
 .password_field svg {
 	position: absolute;
 	right: 15px;

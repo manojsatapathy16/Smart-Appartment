@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect, useMemo } from "react";
-import "../guests/style.css";
+import "../../../home/style.css";
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
 import { PostContext } from '@/context/DataContext';
@@ -12,6 +12,7 @@ import Footer from "@/Components/Footer/page";
 import Image from 'next/image'
 import nodatafound from '../../../../public/nodatafound.png';
 import Pagination from '../../../../Components/Paginations/pagination';
+import { toast } from 'react-hot-toast';
 
 
 
@@ -51,23 +52,28 @@ const Security = () => {
             formData.append('page_no', currentPage);
             axios.post(APIS.SECURITY_LIST, formData, { headers }).then(({ data }) => {
                 if (data.status) {
+                    toast.success('Please find all list');
                     console.log(data, 'people list')
                     setSecurityList(data.data);
                     setTotalPage(data.total_pages);
                     setPageSize(data.pagesize)
-
+                    toast.success('successfully loaded all lists');
                 } else {
+                    toast.error(data.msg);
                     console.log(data.msg);
                 }
-
+               
             })
+           
         }
-        catch (err) {
+        catch (err:any) {
+            toast.error(err);
             console.log(err);
             router.replace('./')
         }
 
     }
+   
     const actionCall = (e: any) => {
         try {
             const headers = { 'Authorization': 'Bearer ' + token };

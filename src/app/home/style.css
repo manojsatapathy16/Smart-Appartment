@@ -19013,12 +19013,19 @@ footer .help-people {
 .main-container .listed .item-meeting .data-meeting .info-meet li {
   border-top: 1px solid #f7f4f4;
   margin-right: 15px;
-  padding: 11px 5px 5px 5px;
+  padding: 12px 5px 12px 5px;
+}
+.main-container .listed .item-meeting .data-meeting .info-meet.info-meet-withbtn li {
+  padding: 5px 5px 5px 5px;
 }
 /* line 729, ../sass/styles.scss */
 .main-container .listed .item-meeting .data-meeting .info-meet li p {
   line-height: 20px;
   text-transform: capitalize;
+  margin: 0;
+}
+.main-container .listed .item-meeting .data-meeting .info-meet li.info-meet-withbtn p {
+  margin: 0;
 }
 /* line 732, ../sass/styles.scss */
 .main-container .listed .item-meeting .data-meeting .info-meet li p.time {

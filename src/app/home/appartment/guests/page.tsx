@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect, useMemo } from "react";
-import "./style.css";
+import "../../../home/style.css";
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
 import { PostContext } from '@/context/DataContext';
@@ -9,14 +9,12 @@ import axios from 'axios';
 import { APIS } from "@/NetworkConroller";
 import Header from "@/Components/Header/page";
 import Footer from "@/Components/Footer/page";
-import Image from 'next/image'
 import nodatafound from '../../../../../public/nodatafound.png';
 import Pagination from '../../../../Components/Paginations/pagination';
-
-
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Image from "next/image";
 
 
 
@@ -187,7 +185,12 @@ const addVisiters = () => {
                                         </ul>
                                     </div>
                                 </div>
-                                {!customerList.length ? <div className="nodatafound"><Image src={nodatafound} alt="no data found" /></div> : null}
+                                {!customerList.length ? <div className="nodatafound"><Image
+                                    src={nodatafound}
+                                    alt="Landscape picture"
+                                // width={500}
+                                //   height={500}
+                                /></div> : null}
                                 {customerList?.map((each: any) => {
                                     return (
 
@@ -219,7 +222,7 @@ const addVisiters = () => {
                                                                 {each?.allimg?.map((img: any) => {
                                                                     return (
                                                                         <div key={img}>
-                                                                            <Image src={img} alt="doctor" className="img-responsive" />
+                                                                            <img src={img.toString()} alt="doctor" className="img-responsive" />
                                                                         </div>
                                                                     )
                                                                 })}
@@ -235,7 +238,7 @@ const addVisiters = () => {
                                                     </div>
 
                                                     <div className="data-meeting">
-                                                        <ul className="list-unstyled info-meet">
+                                                        <ul className="list-unstyled info-meet ">
                                                             <li><p>Visiter Name: <span>{each.visitor_name}</span></p></li>
                                                             <li><p>Visit To: <span>{each.visit_to}</span></p></li>
                                                             <li><p>Flat No: <span>{each.flat_no}</span></p></li>

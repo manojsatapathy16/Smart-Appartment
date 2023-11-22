@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import "../guests/style.css";
+import "../../../home/style.css";
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
 import { PostContext } from '@/context/DataContext';
