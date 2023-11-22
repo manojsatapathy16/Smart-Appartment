@@ -48,7 +48,6 @@ const Guests = () => {
     // console.log(totalPage,'totalpage*****')
     // console.log(pageSize,'pageSize****')
     useEffect(() => {
-        // console.log(router?.query,'@Manoj here')
         getCall()
         setActiveClass("Guest's");
         navActive("Guest's");
