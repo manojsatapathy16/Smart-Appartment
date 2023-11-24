@@ -24,7 +24,7 @@ const Login = () => {
     // const [actionMessage, setActionMessage] = useState<any>();
     // const [showMessage, setShowMessage] = useState(false);
 
-
+console.log(userData,'context data after login')
     const router = useRouter()
     useEffect(() => {
         getEmpData();
@@ -65,30 +65,44 @@ const Login = () => {
                     setLoader(true);
 
                     if (data.user_type == 'aprt') {
-                        localStorage.setItem('authorization', data.user_type)
-                        localStorage.setItem('token', data.token)
-                        localStorage.setItem('userName', data.name)
-                        localStorage.setItem('userImage', data.img)
-                        localStorage.setItem('path', '/home/appartment')
+                        if (typeof window !== 'undefined') {
+                            // Perform localStorage action
+                            localStorage.setItem('authorization', data.user_type)
+                            localStorage.setItem('token', data.token)
+                            localStorage.setItem('userName', data.name)
+                            localStorage.setItem('userImage', data.img)
+                            localStorage.setItem('path', '/home/appartment')
+                          }
+                          
+                       
                         let empData = {
                             id: employeeid,
                             psw: password,
                         };
-                        localStorage.setItem('empData', JSON.stringify(empData));
+                        if (typeof window !== 'undefined') {
+                            localStorage.setItem('empData', JSON.stringify(empData));
+                        }
+                       
                         setLoader(false);
                         router.push('home/appartment/guests');
                         addData(data);
                     } else if (data.user_type == 'cus') {
-                        localStorage.setItem('authorization', data.user_type)
-                        localStorage.setItem('token', data.token)
-                        localStorage.setItem('userName', data.name)
-                        localStorage.setItem('userImage', data.img)
-                        localStorage.setItem('path', '/home/customer')
+                        if (typeof window !== 'undefined') {
+                            localStorage.setItem('authorization', data.user_type)
+                            localStorage.setItem('token', data.token)
+                            localStorage.setItem('userName', data.name)
+                            localStorage.setItem('userImage', data.img)
+                            localStorage.setItem('path', '/home/customer')
+                        }
+                       
                         let empData = {
                             id: employeeid,
                             psw: password,
                         };
-                        localStorage.setItem('empData', JSON.stringify(empData));
+                        if (typeof window !== 'undefined') {
+                            localStorage.setItem('empData', JSON.stringify(empData));
+                        }
+                        
                         setLoader(false);
                         router.push('home/customer/guests');
                         addData(data);

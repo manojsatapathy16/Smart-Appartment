@@ -22,6 +22,7 @@ import Image from "next/image";
 
 const Guests = () => {
     var initialValue={visitorName:'',Purpose:'',ArrivalTime:'',Members:'',UploadImage:''};
+    
     const { navActive, navActives } = useContext(PostContext);
     const [activeClass, setActiveClass] = useState<any>(navActives)
     const { userData } = useContext(PostContext);
@@ -33,20 +34,29 @@ const Guests = () => {
     const [currentPage, setCurrentPage] = useState<any>(1);
     const [openPupop, setOpenPupop] = useState<any>(false);
     const [addGuest, setAddGuest] = useState<any>(initialValue);
-    let token: any;
-    let userName: any;
-    let authorization: any;
-    if (typeof window !== 'undefined') {
-     token= localStorage.getItem('token');
-     userName= localStorage.getItem('userName');
-   authorization=localStorage.getItem('authorization');
-    }
+    const [token, setToken] = useState<any>('');
+    const [userName, setUserName] = useState<any>('');
+    const [authorization, setAuthorization] = useState<any>('');
+    console.log(userData,'context data in guest page')
+    // let token: any;
+    // let userName: any;
+    // let authorization: any;
+    useEffect(() => {
+        setToken(localStorage.getItem('token'))
+        setUserName(localStorage.getItem('userName'))
+        setAuthorization(localStorage.getItem('authorization'))
+    },[])
     const router = useRouter();
 
 
 
     // console.log(totalPage,'totalpage*****')
     // console.log(pageSize,'pageSize****')
+    // useEffect(() => {
+    //     token= localStorage.getItem('token');
+    //     userName= localStorage.getItem('userName');
+    //   authorization=localStorage.getItem('authorization');
+    // },[])
     useEffect(() => {
         getCall()
         setActiveClass("Guest's");
