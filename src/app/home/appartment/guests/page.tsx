@@ -15,6 +15,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Image from "next/image";
+import { useSelector } from "react-redux";
 
 
 
@@ -22,10 +23,12 @@ import Image from "next/image";
 
 const Guests = () => {
     var initialValue={visitorName:'',Purpose:'',ArrivalTime:'',Members:'',UploadImage:''};
+    const userData = useSelector((state: any) => state.userdata);
+    console.log(userData.user_data,"Hey baby this us redux")
     
     const { navActive, navActives } = useContext(PostContext);
     const [activeClass, setActiveClass] = useState<any>(navActives)
-    const { userData } = useContext(PostContext);
+    // const { userData } = useContext(PostContext);
     const [customerList, setCustomerList] = useState<any>([]);
     // console.log(userData,'contextdata')
     const [selectvalue, setSelectValue] = useState('');

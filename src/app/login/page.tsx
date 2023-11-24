@@ -12,9 +12,12 @@ import axios from 'axios';
 import { APIS } from "@/NetworkConroller";
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-hot-toast';
+import { storeuser } from "@/Redux/Reducers/userSlice";
+import { useDispatch } from "react-redux";
 
 
 const Login = () => {
+    const dispatch = useDispatch();
     const { userData, addData } = useContext(PostContext);
     const [employeeid, setEmployeeid] = useState('a@gmail.com'); //01SC370
     const [password, setPassword] = useState('Abc@1234'); //suyog2022**
@@ -61,7 +64,7 @@ console.log(userData,'context data after login')
             await axios.post(APIS.LOGIN, formdata).then(({ data }) => {
                 if (data.status) {
                     console.log(data, 'hiii')
-
+                    storeUser(data)
                     setLoader(true);
 
                     if (data.user_type == 'aprt') {
@@ -126,6 +129,10 @@ console.log(userData,'context data after login')
             router.push('./')
         }
     };
+
+    const storeUser=(data:any)=>{
+        dispatch(storeuser(data));
+      }
     const togglePasswordType = (type: boolean) => {
         {
             setPasswordType(type)
