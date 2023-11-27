@@ -66,7 +66,6 @@ console.log(userData,'context data after login')
                     console.log(data, 'hiii')
                     storeUser(data)
                     setLoader(true);
-
                     if (data.user_type == 'aprt') {
                         if (typeof window !== 'undefined') {
                             // Perform localStorage action
