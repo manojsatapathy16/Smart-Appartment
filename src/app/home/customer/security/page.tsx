@@ -12,15 +12,17 @@ import Footer from "@/Components/Footer/page";
 import Image from 'next/image'
 import nodatafound from '../../../../public/nodatafound.png';
 import Pagination from '../../../../Components/Paginations/pagination';
+import { useSelector } from "react-redux";
 
 
 
 
 
 const Security = () => {
+    const userData = useSelector((state: any) => state.userdata);
     const { navActive, navActives } = useContext(PostContext);
     const [activeClass, setActiveClass] = useState<any>(navActives)
-    const { userData } = useContext(PostContext);
+    // const { userData } = useContext(PostContext);
     const [securityList, setSecurityList] = useState<any>([]);
     const [actionApprove, setActionApprove] = useState<any>(false);
     const [openPupop, setOpenPupop] = useState<any>(false);
@@ -30,9 +32,9 @@ const Security = () => {
     const [currentPage, setCurrentPage] = useState<any>(1);
     // console.log(userData,'contextdata')
     
-    let token: any = localStorage.getItem('token');
-    let userName: any = localStorage.getItem('userName');
-    let authorization: any = localStorage.getItem('authorization');
+    let token: any = userData.user_data?.token;
+    // let userName: any = localStorage.getItem('userName');
+    let authorization: any = userData?.auth;
     const router = useRouter();
 
 

@@ -25,6 +25,7 @@ const Guests = () => {
     var initialValue={visitorName:'',Purpose:'',ArrivalTime:'',Members:'',UploadImage:''};
     const userData = useSelector((state: any) => state.userdata);
     console.log(userData.user_data,"Hey baby this us redux")
+    console.log(userData,"Hey its user name redux")
     
     const { navActive, navActives } = useContext(PostContext);
     const [activeClass, setActiveClass] = useState<any>(navActives)
@@ -45,9 +46,9 @@ const Guests = () => {
     // let userName: any;
     // let authorization: any;
     useEffect(() => {
-        setToken(localStorage.getItem('token'))
-        setUserName(localStorage.getItem('userName'))
-        setAuthorization(localStorage.getItem('authorization'))
+        setToken(userData.user_data?.token)
+        setUserName(userData.user_data?.name)
+        setAuthorization(userData.user_data?.user_type)
     },[])
     const router = useRouter();
 

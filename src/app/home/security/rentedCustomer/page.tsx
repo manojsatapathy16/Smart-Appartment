@@ -10,17 +10,19 @@ import { APIS } from "@/NetworkConroller";
 import Header from "@/Components/Header/page";
 import Footer from "@/Components/Footer/page";
 import Image from 'next/image';
+import { useSelector } from "react-redux";
 
 
 
 const RentedCustomer = () => {
+    const userData = useSelector((state: any) => state.userdata);
     const { navActive,navActives } = useContext(PostContext);
     const [activeClass,setActiveClass]=useState<any>(navActives)
-    const {userData} = useContext(PostContext);
+    // const {userData} = useContext(PostContext);
     const [customerList,setCustomerList]=useState<any>([]);
     // console.log(userData,'contextdata')
-    let token:any = localStorage.getItem('token');
-    let userName:any = localStorage.getItem('userName');
+    let token:any = userData.user_data?.token;
+    // let userName:any = localStorage.getItem('userName');
     const router = useRouter();
 
 

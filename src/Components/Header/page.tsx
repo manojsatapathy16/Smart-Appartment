@@ -4,22 +4,30 @@ import Image from 'next/image'
 import logo from '../../../public/LOGO_SMS.png';
 import { useContext, useState } from "react";
 import { PostContext } from '@/context/DataContext';
+import { clear } from "@/Redux/Reducers/userSlice";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 function Header(props: any) {
+    const dispatch = useDispatch();
+    const userData = useSelector((state: any) => state.userdata);
     const { navActive, navActives } = useContext(PostContext);
     const [activeClass, setActiveClass] = useState<any>(navActives)
-    let userName: any = localStorage.getItem('userName');
-    let userImage: any = localStorage.getItem('userImage');
-    let navPath: any = localStorage.getItem('path');
+    let userName: any = userData?.user_data?.name;
+    let userImage: any = userData?.user_data?.img;
+    let navPath: any = userData.path;
     console.log(navActives, 'navactive');
     const router = useRouter();
     const Logout = () => {
-        localStorage.removeItem('empData');
-        localStorage.removeItem('userImage');
-        localStorage.removeItem('userName');
-        localStorage.removeItem('authorization');
-        localStorage.removeItem('token');
-        localStorage.removeItem('path');
+        // localStorage.removeItem('empData');
+        // localStorage.removeItem('userImage');
+        // localStorage.removeItem('userName');
+        // localStorage.removeItem('authorization');
+        // localStorage.removeItem('token');
+        // localStorage.removeItem('path');
+       
+        // Clear();
+        dispatch(clear());
         router.push('/')
     }
     // active class add to nav element
@@ -30,6 +38,10 @@ function Header(props: any) {
         e.target.innerHTML === "Rented Customer" && router.push(navPath + '/rentedCustomer')
         e.target.innerHTML == "Security" && router.push(navPath + '/security')
     }
+    // const Clear=()=>{
+       
+    //   }
+ 
     return (
         <div>
             <header>

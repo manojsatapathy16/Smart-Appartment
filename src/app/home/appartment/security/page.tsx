@@ -13,15 +13,17 @@ import Image from 'next/image'
 import nodatafound from '../../../../../public/nodatafound.png';
 import Pagination from '../../../../Components/Paginations/pagination';
 import { toast } from 'react-hot-toast';
+import { useSelector } from "react-redux";
 
 
 
 
 
 const Security = () => {
+    const userData = useSelector((state: any) => state.userdata);
     const { navActive, navActives } = useContext(PostContext);
     const [activeClass, setActiveClass] = useState<any>(navActives)
-    const { userData } = useContext(PostContext);
+    // const { userData } = useContext(PostContext);
     const [securityList, setSecurityList] = useState<any>([]);
     const [actionApprove, setActionApprove] = useState<any>(false);
     const [openPupop, setOpenPupop] = useState<any>(false);
@@ -36,8 +38,8 @@ const Security = () => {
 
     // console.log(userData,'contextdata')
     
-    let token: any = localStorage.getItem('token');
-    let userName: any = localStorage.getItem('userName');
+    let token: any = userData.user_data?.token;
+    // let userName: any = localStorage.getItem('userName');
     const router = useRouter();
 
 

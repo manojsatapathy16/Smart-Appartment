@@ -16,16 +16,18 @@ import Pagination from '../../../../Components/Paginations/pagination';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useSelector } from "react-redux";
 
 
 
 
 
 const Guests = () => {
+    const userData = useSelector((state: any) => state.userdata);
     var initialValue = { visitorName: '', Purpose: '', ArrivalTime: '', Members: '', UploadImage: '' };
     const { navActive, navActives } = useContext(PostContext);
     const [activeClass, setActiveClass] = useState<any>(navActives)
-    const { userData } = useContext(PostContext);
+    // const { userData } = useContext(PostContext);
     const [customerList, setCustomerList] = useState<any>([]);
     // console.log(userData,'contextdata')
     const [selectvalue, setSelectValue] = useState('');
@@ -34,9 +36,9 @@ const Guests = () => {
     const [currentPage, setCurrentPage] = useState<any>(1);
     const [openPupop, setOpenPupop] = useState<any>(false);
     const [addGuest, setAddGuest] = useState<any>(initialValue);
-    let token: any = localStorage.getItem('token');
-    let userName: any = localStorage.getItem('userName');
-    let authorization: any = localStorage.getItem('authorization');
+    let token: any = userData.user_data?.token;
+    // let userName: any = localStorage.getItem('userName');
+    let authorization: any = userData?.auth;
     const [selectedImage, setSelectedImage] = useState<any>(null);
     const [selectedImageView, setSelectedImageView] = useState<any>(null);
 

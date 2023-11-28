@@ -13,7 +13,9 @@ import { APIS } from "@/NetworkConroller";
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-hot-toast';
 import { storeuser } from "@/Redux/Reducers/userSlice";
+import { path } from "@/Redux/Reducers/userSlice";
 import { useDispatch } from "react-redux";
+
 
 
 const Login = () => {
@@ -64,46 +66,52 @@ console.log(userData,'context data after login')
             await axios.post(APIS.LOGIN, formdata).then(({ data }) => {
                 if (data.status) {
                     console.log(data, 'hiii')
-                    storeUser(data)
+                    // storeUser(data)
+                    // Path('/home/appartment')
                     setLoader(true);
                     if (data.user_type == 'aprt') {
-                        if (typeof window !== 'undefined') {
-                            // Perform localStorage action
-                            localStorage.setItem('authorization', data.user_type)
-                            localStorage.setItem('token', data.token)
-                            localStorage.setItem('userName', data.name)
-                            localStorage.setItem('userImage', data.img)
-                            localStorage.setItem('path', '/home/appartment')
-                          }
+                        storeUser(data)
+                        Path('/home/appartment')
+                        // if (typeof window !== 'undefined') {
+                            
+                        //     localStorage.setItem('authorization', data.user_type)
+                        //     localStorage.setItem('token', data.token)
+                        //     localStorage.setItem('userName', data.name)
+                        //     localStorage.setItem('userImage', data.img)
+                        //     localStorage.setItem('path', '/home/appartment')
+                        //   }
                           
                        
-                        let empData = {
-                            id: employeeid,
-                            psw: password,
-                        };
-                        if (typeof window !== 'undefined') {
-                            localStorage.setItem('empData', JSON.stringify(empData));
-                        }
+                        // let empData = {
+                        //     id: employeeid,
+                        //     psw: password,
+                        // };
+                        // if (typeof window !== 'undefined') {
+                        //     localStorage.setItem('empData', JSON.stringify(empData));
+                        // }
                        
                         setLoader(false);
                         router.push('home/appartment/guests');
                         addData(data);
                     } else if (data.user_type == 'cus') {
-                        if (typeof window !== 'undefined') {
-                            localStorage.setItem('authorization', data.user_type)
-                            localStorage.setItem('token', data.token)
-                            localStorage.setItem('userName', data.name)
-                            localStorage.setItem('userImage', data.img)
-                            localStorage.setItem('path', '/home/customer')
-                        }
+                        storeUser(data)
+                        Path('/home/customer')
+                        // if (typeof window !== 'undefined') {
+                          
+                        //     localStorage.setItem('authorization', data.user_type)
+                        //     localStorage.setItem('token', data.token)
+                        //     localStorage.setItem('userName', data.name)
+                        //     localStorage.setItem('userImage', data.img)
+                        //     localStorage.setItem('path', '/home/customer')
+                        // }
                        
-                        let empData = {
-                            id: employeeid,
-                            psw: password,
-                        };
-                        if (typeof window !== 'undefined') {
-                            localStorage.setItem('empData', JSON.stringify(empData));
-                        }
+                        // let empData = {
+                        //     id: employeeid,
+                        //     psw: password,
+                        // };
+                        // if (typeof window !== 'undefined') {
+                        //     localStorage.setItem('empData', JSON.stringify(empData));
+                        // }
                         
                         setLoader(false);
                         router.push('home/customer/guests');
@@ -131,6 +139,9 @@ console.log(userData,'context data after login')
 
     const storeUser=(data:any)=>{
         dispatch(storeuser(data));
+      }
+      const Path=(data:any)=>{
+        dispatch(path(data));
       }
     const togglePasswordType = (type: boolean) => {
         {

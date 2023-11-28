@@ -12,13 +12,15 @@ import Footer from "@/Components/Footer/page";
 import Image from 'next/image'
 import nodatafound from '../../../../../public/nodatafound.png';
 import Pagination from '../../../../Components/Paginations/pagination';
+import { useSelector } from "react-redux";
 
 
 
 const RentedCustomer = () => {
+    const userData = useSelector((state: any) => state.userdata);
     const { navActive, navActives } = useContext(PostContext);
     const [activeClass, setActiveClass] = useState<any>(navActives)
-    const { userData } = useContext(PostContext);
+    // const { userData } = useContext(PostContext);
     const [customerList, setCustomerList] = useState<any>([]);
     const [totalPage, setTotalPage] = useState('');
     const [pageSize, setPageSize] = useState<number>(1);
@@ -42,7 +44,7 @@ const RentedCustomer = () => {
         navActive("Rented Customer");
     }, [actionApprove, actionActive])
     const getCall = () => {
-        let token: any = localStorage.getItem('token');
+        let token: any = userData.user_data?.token;
         try {
             const headers = { 'Authorization': 'Bearer ' + token };
             let formData = new FormData();
@@ -70,7 +72,7 @@ const RentedCustomer = () => {
 
     }
     const actionCall = (e: any) => {
-        let token: any = localStorage.getItem('token');
+        let token: any = userData.user_data?.token;
         try {
             const headers = { 'Authorization': 'Bearer ' + token };
             let formData = new FormData();
