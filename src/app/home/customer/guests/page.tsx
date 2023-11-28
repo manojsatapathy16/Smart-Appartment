@@ -46,7 +46,7 @@ const Guests = () => {
 
 
 
-    // console.log(totalPage,'totalpage*****')
+    console.log(authorization,'authorization guest page of customer')
     // console.log(pageSize,'pageSize****')
     useEffect(() => {
         // console.log(router?.query,'@Manoj here')
@@ -227,7 +227,7 @@ const Guests = () => {
                                                                 {each?.allimg?.map((img: any) => {
                                                                     return (
                                                                         <div key={img}>
-                                                                            <Image src={img} alt="doctor" className="img-responsive" />
+                                                                            <img src={img.toString()} alt="doctor" className="img-responsive" />
                                                                         </div>
                                                                     )
                                                                 })}

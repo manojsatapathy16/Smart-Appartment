@@ -16,7 +16,7 @@ function Header(props: any) {
     let userName: any = userData?.user_data?.name;
     let userImage: any = userData?.user_data?.img;
     let navPath: any = userData.path;
-    console.log(navActives, 'navactive');
+    console.log(userData?.user_data?.user_type, 'user type header');
     const router = useRouter();
     const Logout = () => {
         // localStorage.removeItem('empData');
@@ -95,7 +95,7 @@ function Header(props: any) {
                         <ul className="nav navbar-nav" id="nav">
                             {/* <li className="navItem active" onClick={()=>router.push('/appointmentList')}><i className="fa fa-list-alt"></i> <a href="#"> Guest's</a> </li> */}
                             <li className={(activeClass == "Guest's") || (navActives == "Guest's") ? "navItem active" : "navItem"} onClick={handleClickNav}><i className="fa fa-list-alt"></i> <a href="#">Guest&lsquo;s</a> </li>
-                            {(props.authorization == 'cus') ? null : <li className={(activeClass == "Rented Customer") || (navActives == "Rented Customer") ? "navItem active" : "navItem"} onClick={handleClickNav}> <i className="fa fa-address-book-o"></i> <a href="#">Rented Customer</a> </li>}
+                            {(userData?.user_data?.user_type == 'cus') ? null : <li className={(activeClass == "Rented Customer") || (navActives == "Rented Customer") ? "navItem active" : "navItem"} onClick={handleClickNav}> <i className="fa fa-address-book-o"></i> <a href="#">Rented Customer</a> </li>}
                             <li className={(activeClass == "Security") || (navActives == "Security") ? "navItem active" : "navItem"} onClick={handleClickNav}> <i className="fa fa-file-text-o"></i> <a href="#">Security</a> </li>
                             {/* <li> <i className="fa fa-files-o"></i> <a href="javascript:void(0)">Result Examinations</a> </li>
                             <li> <i className="fa fa-pencil"></i> <a href="javascript:void(0)">my account</a> </li> */}

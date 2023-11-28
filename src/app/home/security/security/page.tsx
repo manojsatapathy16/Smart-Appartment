@@ -168,7 +168,7 @@ const Security = () => {
                                                     {/* <!--Item--> */}
                                                     <div className="avatar-doctor">
                                                         <div className="avatar-image">
-                                                            <Image src={each?.picture} alt="doctor" className="img-responsive" />
+                                                            <img src={each?.picture} alt="doctor" className="img-responsive" />
                                                             {/* <h4>
                           <a href="javascript:void(0)" title="See Profile">{each.visitor_name}</a></h4> */}
                                                             {/* <p>Cardiothoracic Anesthesia and Anesthesiology - FCI</p> */}

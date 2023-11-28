@@ -21,7 +21,7 @@ import { useDispatch } from "react-redux";
 const Login = () => {
     const dispatch = useDispatch();
     const { userData, addData } = useContext(PostContext);
-    const [employeeid, setEmployeeid] = useState('a@gmail.com'); //01SC370
+    const [employeeid, setEmployeeid] = useState('z1@gmail.com'); //01SC370
     const [password, setPassword] = useState('Abc@1234'); //suyog2022**
     const [loader, setLoader] = useState(false);
     const [checksave, setCheckSave] = useState(false);
@@ -66,21 +66,11 @@ console.log(userData,'context data after login')
             await axios.post(APIS.LOGIN, formdata).then(({ data }) => {
                 if (data.status) {
                     console.log(data, 'hiii')
-                    // storeUser(data)
-                    // Path('/home/appartment')
                     setLoader(true);
                     if (data.user_type == 'aprt') {
                         storeUser(data)
                         Path('/home/appartment')
-                        // if (typeof window !== 'undefined') {
-                            
-                        //     localStorage.setItem('authorization', data.user_type)
-                        //     localStorage.setItem('token', data.token)
-                        //     localStorage.setItem('userName', data.name)
-                        //     localStorage.setItem('userImage', data.img)
-                        //     localStorage.setItem('path', '/home/appartment')
-                        //   }
-                          
+                
                        
                         // let empData = {
                         //     id: employeeid,
@@ -96,14 +86,7 @@ console.log(userData,'context data after login')
                     } else if (data.user_type == 'cus') {
                         storeUser(data)
                         Path('/home/customer')
-                        // if (typeof window !== 'undefined') {
-                          
-                        //     localStorage.setItem('authorization', data.user_type)
-                        //     localStorage.setItem('token', data.token)
-                        //     localStorage.setItem('userName', data.name)
-                        //     localStorage.setItem('userImage', data.img)
-                        //     localStorage.setItem('path', '/home/customer')
-                        // }
+                
                        
                         // let empData = {
                         //     id: employeeid,

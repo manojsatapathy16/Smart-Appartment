@@ -214,7 +214,7 @@ const addVisiters = () => {
                                                                 {each?.allimg?.map((img: any) => {
                                                                     return (
                                                                         <div key={img}>
-                                                                            <Image src={img} alt="doctor" className="img-responsive" />
+                                                                            <img src={img} alt="doctor" className="img-responsive" />
                                                                         </div>
                                                                     )
                                                                 })}
