@@ -126,3 +126,12 @@ button.btn_login.disable:hover{
 .password_field {
 	position: relative;
 }
+.password_field i {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	right: 20px;
+	font-size: 18px;
+  color: gray;
+  cursor: pointer;
+}

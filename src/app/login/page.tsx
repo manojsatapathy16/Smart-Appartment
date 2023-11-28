@@ -15,7 +15,8 @@ import { toast } from 'react-hot-toast';
 import { storeuser } from "@/Redux/Reducers/userSlice";
 import { path } from "@/Redux/Reducers/userSlice";
 import { useDispatch } from "react-redux";
-
+// import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
+// import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 
 
 const Login = () => {
@@ -153,8 +154,8 @@ console.log(userData,'context data after login')
                                     <div className="password_field">
                                         {passwordType ? <input value={password} onChange={(e) => setPassword(e.target.value)} type="text" placeholder="Password" /> : <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Password" />}
 
-                                        {/* {passwordType?<VisibilityOutlinedIcon onClick={()=>togglePasswordType(false)}/>:<VisibilityOffOutlinedIcon onClick={()=>togglePasswordType(true)}/>} */}
-
+                                        {passwordType?<i className="fa fa-eye" aria-hidden="true" onClick={()=>togglePasswordType(false)}></i>:<i className="fa fa-eye-slash" aria-hidden="true" onClick={()=>togglePasswordType(true)}></i>}
+                                      
                                     </div>
 
                                 </div>
