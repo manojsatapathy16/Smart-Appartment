@@ -1,5 +1,5 @@
-export const BASE_URL: string = 'http://192.168.11.250:8000/';
-// export const BASE_URL: string = 'https://smartapartment.onrender.com/';
+// export const BASE_URL: string = 'http://192.168.11.250:8000/';
+export const BASE_URL: string = 'https://smartapartment.onrender.com/';
 
 export const APIS: { [key: string]: string } = {
   LOGIN: BASE_URL + 'login',
